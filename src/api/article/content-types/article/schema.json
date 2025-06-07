@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
     "description": {
       "type": "text",
       "maxLength": 80
