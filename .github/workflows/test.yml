@@ -1,6 +1,10 @@
 name: Run Playwright Tests
 
 on:
+  push:
+    branches:
+      - 'main'
+      - 'pr_**'
   pull_request:
 
 jobs:
