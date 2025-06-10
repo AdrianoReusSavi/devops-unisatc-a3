@@ -22,11 +22,15 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Start Strapi
+      - name: Install wait-on
+        run: npm install wait-on
+
+      - name: Start Strapi and wait for it
         run: |
           npm run build
-          npm run start &
-          sleep 10 # aguarda Strapi subir
+          npm run start > strapi.log 2>&1 &
+          npx wait-on http://localhost:1337/admin
+          tail -n 30 strapi.log
 
       - name: Run tests
         run: npx playwright test
