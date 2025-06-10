@@ -5,7 +5,7 @@
     "singularName": "article",
     "pluralName": "articles",
     "displayName": "Artigo",
-    "description": "Crie o conteúdo do seu blog"
+    "description": "Crie o conteúdo do seu site"
   },
   "options": {
     "draftAndPublish": true
