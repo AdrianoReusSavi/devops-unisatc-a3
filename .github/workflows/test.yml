@@ -31,7 +31,7 @@ jobs:
 
       - name: Build Strapi
         run: |
-          npx strapi build --no-telemetry
+          STRAPI_TELEMETRY_DISABLED=true npx strapi build
           echo "✅ Build finalizado com sucesso"
 
       - name: Start Strapi and wait for it
