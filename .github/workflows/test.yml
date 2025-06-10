@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18'
 
       - name: Install dependencies
         run: npm ci
@@ -25,11 +25,19 @@ jobs:
       - name: Install wait-on
         run: npm install wait-on
 
+      - name: Build Strapi
+        run: |
+          npx strapi build --no-telemetry
+          echo "✅ Build finalizado com sucesso"
+
       - name: Start Strapi and wait for it
         run: |
-          npm run build
           npm run start > strapi.log 2>&1 &
-          npx wait-on http://localhost:1337/admin
+          echo "🚀 Iniciando Strapi e aguardando /admin..."
+          START_TIME=$(date +%s)
+          npx wait-on http://localhost:1337/admin --timeout=60000
+          END_TIME=$(date +%s)
+          echo "✅ Strapi ficou pronto em $((END_TIME - START_TIME)) segundos"
           tail -n 30 strapi.log
 
       - name: Run tests
